@@ -6,7 +6,7 @@ with open("variables.tf", 'r') as file:
 for x in tf_dict["variable"]:
     for key, value in x.items():
         name = key
-        var_type = value.get("type", None)
+        var_type = value.get("type", None).strip("${}")
         description = value.get("description", None)
         default = value.get("default", None)
 
