@@ -34,12 +34,24 @@ brew install poetry
 
 You can use the `run.sh` script to install the Python dependencies with Poetry and then run the program.
 
+### Default path
+
+If a `variables.tf` file is in the same directory as the `run.sh` script, it can be called without any arguments.
+
 ```sh
-./run.sh vtf2md/main.py --path tests/variables.tf
+./run.sh
+```
+
+Otherwise... ⬇️
+
+### Passing a Terraform variables file path
+
+```sh
+./run.sh --path tests/variables.tf
 ```
 
 or `-p` for short
 
 ```sh
-./run.sh vtf2md/main.py -p tests/variables.tf
+./run.sh -p tests/variables.tf
 ```
