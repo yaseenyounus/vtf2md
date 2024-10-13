@@ -8,6 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.12"
 python-hcl2 = "^5.0.0"
+pytablewriter = "^1.2.0"
 
 
 [build-system]
