@@ -55,3 +55,60 @@ or `-p` for short
 ```sh
 ./run.sh -p tests/variables.tf
 ```
+
+## Example
+
+### `tests/variables.tf` file
+
+```terraform
+variable "vpc_cidr_block" {
+  type = string
+  description = "The top-level CIDR block for the VPC."
+  default     = "10.1.0.0/16"
+}
+
+variable "cidr_blocks" {
+  type = list(string)
+  description = "The CIDR blocks to create the workstations in."
+  default     = ["10.1.1.0/24", "10.1.2.0/24"]
+}
+
+variable "namespace" {
+  type = string
+  description = "Default namespace"
+}
+
+variable "cluster_id" {
+  type = string
+  description = "Id to assign the new cluster"
+}
+
+variable "public_key_path" {
+  type = string
+  description = "Path to public key for ssh access"
+  default     = "~/.ssh/id_rsa.pub"
+}
+
+variable "node_groups" {
+  type = number
+  description = "Number of nodes groups to create in the cluster"
+  default     = 3
+}
+```
+
+### Run
+
+```sh
+./run.sh -p tests/variables.tf
+```
+
+### Output
+
+| Name            | Type         | Description                                     | Default                        | Required |
+| --------------- | ------------ | ----------------------------------------------- | ------------------------------ | -------- |
+| vpc_cidr_block  | string       | The top-level CIDR block for the VPC.           | 10.1.0.0/16                    | False    |
+| cidr_blocks     | list(string) | The CIDR blocks to create the workstations in.  | ['10.1.1.0/24', '10.1.2.0/24'] | False    |
+| namespace       | string       | Default namespace                               | n/a                            | True     |
+| cluster_id      | string       | Id to assign the new cluster                    | n/a                            | True     |
+| public_key_path | string       | Path to public key for ssh access               | ~/.ssh/id_rsa.pub              | False    |
+| node_groups     | number       | Number of nodes groups to create in the cluster | 3                              | False    |
