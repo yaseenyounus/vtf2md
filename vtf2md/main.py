@@ -13,10 +13,10 @@ for x in tf_dict["variable"]:
         name = key
         var_type = value.get("type", "").strip("${}")
         description = value.get("description", "")
-        default = value.get("default", "")
+        default = value.get("default", "n/a")
 
         md_table.append(
-            [name, var_type, description, default, "False" if default else "True"]
+            [name, var_type, description, default, "True" if default == "n/a" else "False"]
         )
 
 
