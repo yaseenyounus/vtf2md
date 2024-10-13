@@ -1,8 +1,19 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 from sys import exit
+
+
+def cli_arguments() -> Namespace:
+    parser = ArgumentParser()
+    parser.add_argument(
+        "-p",
+        "--path",
+        required=True,
+        help="Local path to your Terraform variables file",
+    )
+    return parser.parse_args()
 
 
 def load_tf_file(file_path: str) -> dict:
@@ -52,16 +63,7 @@ def generate_md_table(values: list) -> None:
 
 
 def main():
-    parser = ArgumentParser()
-    parser.add_argument(
-        "-p",
-        "--path",
-        required=True,
-        help="Local path to your Terraform variables file",
-    )
-    args = parser.parse_args()
-
-    # terraform_dict = load_tf_file("variables.tf")
+    args = cli_arguments()
     terraform_dict = load_tf_file(args.path)
     markdown_list = extract_values(terraform_dict)
     generate_md_table(markdown_list)
