@@ -47,12 +47,17 @@ def extract_values(values: dict) -> list:
 
 
 def generate_md_table(values: list) -> None:
-    headers = ["Name", "Type", "Description", "Default", "Required"]
     MarkdownTableWriter(
-        headers=headers,
+        headers=["Name", "Type", "Description", "Default", "Required"],
         value_matrix=values,
         margin=1,
-        column_alignments=["left"] * len(headers),
+        column_styles=[
+            Style(align="left"),
+            Style(align="left"),
+            Style(align="left"),
+            Style(align="left"),
+            Style(align="left"),
+        ],
     ).write_table()
 
 
