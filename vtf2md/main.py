@@ -43,7 +43,6 @@ def extract_values(values: dict) -> list:
                     "True" if default == "n/a" else "False",
                 ]
             )
-
     return md_table
 
 
