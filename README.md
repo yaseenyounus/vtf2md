@@ -119,4 +119,4 @@ Feel free to open a PR!
 
 ## License
 
-This project is licensed under the MIT License
+This project is licensed under the [MIT License](https://github.com/yaseenyounus/vtf2md/blob/main/LICENSE)
