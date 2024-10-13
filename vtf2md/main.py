@@ -11,17 +11,13 @@ with open("variables.tf", "r") as file:
 for x in tf_dict["variable"]:
     for key, value in x.items():
         name = key
-        var_type = value.get("type", None).strip("${}")
-        description = value.get("description", None)
-        default = value.get("default", None)
+        var_type = value.get("type", "").strip("${}")
+        description = value.get("description", "")
+        default = value.get("default", "")
 
         md_table.append(
             [name, var_type, description, default, "False" if default else "True"]
         )
-
-        print(name, var_type, description, default)
-
-print(md_table)
 
 
 writer = MarkdownTableWriter(
