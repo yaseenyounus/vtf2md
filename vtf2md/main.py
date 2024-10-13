@@ -2,11 +2,16 @@ from argparse import ArgumentParser
 from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
+from sys import exit
 
 
 def load_tf_file(file_path: str) -> dict:
-    with open(file_path, "r") as file:
-        return load(file)
+    try:
+        with open(file_path, "r") as file:
+            return load(file)
+    except FileNotFoundError:
+        print("Error: The file wasn't found. Try again...")
+        exit(1)
 
 
 def extract_values(values: dict) -> list:
@@ -56,12 +61,10 @@ def main():
     )
     args = parser.parse_args()
 
-    print(args)
-    print(args.path)
-
     # terraform_dict = load_tf_file("variables.tf")
-    # markdown_list = extract_values(terraform_dict)
-    # generate_md_table(markdown_list)
+    terraform_dict = load_tf_file(args.path)
+    markdown_list = extract_values(terraform_dict)
+    generate_md_table(markdown_list)
 
 
 if __name__ == "__main__":
