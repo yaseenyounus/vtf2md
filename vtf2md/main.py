@@ -25,6 +25,12 @@ def load_tf_file(file_path: str) -> dict:
         exit(1)
 
 
+def required_to_beginning_list(nested_list: list) -> list:
+    required = [x for x in nested_list if "True" in x]
+    optional = [x for x in nested_list if "True" not in x]
+    return required + optional
+
+
 def extract_values(values: dict) -> list:
     md_table = []
     for x in values["variable"]:
@@ -43,7 +49,7 @@ def extract_values(values: dict) -> list:
                     "True" if default == "n/a" else "False",
                 ]
             )
-    return md_table
+    return required_to_beginning_list(md_table)
 
 
 def generate_md_table(values: list) -> None:
