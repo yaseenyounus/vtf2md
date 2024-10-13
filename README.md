@@ -6,8 +6,8 @@ This Python script takes a Terraform `variables.tf` file as input and outputs th
 
 ## Requirements
 
-- `Python` 3.12+
-- [`Poetry`](https://python-poetry.org/docs/#installation)
+- Python 3.12+
+- [Poetry](https://python-poetry.org/docs/#installation)
 
 ## Installation
 
