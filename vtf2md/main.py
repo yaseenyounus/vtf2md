@@ -11,7 +11,7 @@ def cli_arguments() -> Namespace:
         "-p",
         "--path",
         default="variables.tf",
-        help="Local path to your Terraform variables file",
+        help="Local path to your Terraform variables file (default: ./variables.tf)",
     )
     return parser.parse_args()
 
