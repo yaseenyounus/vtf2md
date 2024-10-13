@@ -1,15 +1,18 @@
 [tool.poetry]
 name = "vtf2md"
 version = "0.1.0"
-description = ""
+description = "A tool to convert Terraform variable files into clean Markdown tables"
 authors = ["Yaseen Younus <yay200@gmail.com>"]
 readme = "README.md"
+license = "MIT"
+homepage = "https://github.com/yaseenyounus/vtf2md"
+repository = "https://github.com/yaseenyounus/vtf2md"
+keywords = ["python", "terraform", "variables", "markdown"]
 
 [tool.poetry.dependencies]
 python = "^3.12"
 python-hcl2 = "^5.0.0"
 pytablewriter = "^1.2.0"
-
 
 [build-system]
 requires = ["poetry-core"]

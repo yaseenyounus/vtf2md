@@ -112,3 +112,11 @@ variable "node_groups" {
 | cluster_id      | string       | Id to assign the new cluster                    | n/a                            | True     |
 | public_key_path | string       | Path to public key for ssh access               | ~/.ssh/id_rsa.pub              | False    |
 | node_groups     | number       | Number of nodes groups to create in the cluster | 3                              | False    |
+
+## Contributing
+
+Feel free to open a PR!
+
+## License
+
+This project is licensed under the MIT License
