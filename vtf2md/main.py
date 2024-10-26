@@ -4,6 +4,7 @@ from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 from sys import exit
 from typing import List
+from itertools import chain
 
 
 def cli_arguments() -> List[str]:
@@ -74,8 +75,25 @@ def main():
     print(paths)
 
     # terraform_dict = load_tf_file(args.path)
+    tf_rendered_list = []
+    for path in paths:
+        tf_rendered_list.append(load_tf_file(path))
+    print(tf_rendered_list)
+
     # markdown_list = extract_values(terraform_dict)
-    # generate_md_table(markdown_list)
+    tf_var_list = []
+    for tf_dict in tf_rendered_list:
+        tf_var_list.append(extract_values(tf_dict))
+
+    print(tf_var_list)
+
+    tf_var_combined_list = list(chain(*tf_var_list))
+    print(tf_var_combined_list)
+
+    sorted_tf_vars = required_to_beginning_list(tf_var_combined_list)
+    print(sorted_tf_vars)
+
+    generate_md_table(sorted_tf_vars)
 
 
 if __name__ == "__main__":
