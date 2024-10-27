@@ -6,8 +6,8 @@ from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 
-# TODO - set default path with [] logic
 # TODO - update readme
+# TODO - separate into different files
 
 
 def cli_arguments() -> Namespace:
@@ -23,8 +23,10 @@ def cli_arguments() -> Namespace:
 
 
 def load_terraform_files(paths: List[str]) -> List[Dict[str, Any]]:
+    terraform_hcl_list = []
+    paths = paths or ["variables.tf"]
+
     try:
-        terraform_hcl_list = []
         for path in paths:
             with open(path, "r") as file:
                 terraform_hcl_list.append(load(file))
@@ -82,13 +84,8 @@ def generate_markdown_table(markdown_list: List[List[str]]) -> None:
 
 def main():
     paths = cli_arguments().path
-    print(paths)
-
     terraform_hcl_list = load_terraform_files(paths)
-
     markdown_list = extract_values(terraform_hcl_list)
-    print(markdown_list)
-
     generate_markdown_table(markdown_list)
 
 
