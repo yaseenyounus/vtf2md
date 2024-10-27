@@ -64,10 +64,11 @@ def extract_values(terraform_hcl_list: List[Dict[str, Any]]) -> List[List[str]]:
 
 def generate_markdown_table(values: list) -> None:
     MarkdownTableWriter(
-        headers=["Name", "Type", "Description", "Default", "Required"],
+        headers=["Name", "Type", "Description", "Default", "Required", "Sensitive"],
         value_matrix=values,
         margin=1,
         column_styles=[
+            Style(align="left"),
             Style(align="left"),
             Style(align="left"),
             Style(align="left"),
