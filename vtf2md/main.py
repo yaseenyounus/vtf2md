@@ -10,7 +10,7 @@ from pytablewriter.style import Style
 # TODO - separate into different files
 
 
-def cli_arguments() -> Namespace:
+def parse_cli_arguments() -> Namespace:
     parser = ArgumentParser()
     parser.add_argument(
         "-p",
@@ -21,54 +21,58 @@ def cli_arguments() -> Namespace:
     return parser.parse_args()
 
 
-def load_terraform_files(paths: List[str]) -> List[Dict[str, Any]]:
-    terraform_hcl_list = []
-    paths = paths or ["variables.tf"]
+def load_terraform_files(file_paths: List[str]) -> List[Dict[str, Any]]:
+    terraform_configs = []
+    file_paths = file_paths or ["variables.tf"]
 
     try:
-        for path in paths:
+        for path in file_paths:
             with open(path, "r") as file:
-                terraform_hcl_list.append(load(file))
-        return terraform_hcl_list
+                terraform_configs.append(load(file))
+        return terraform_configs
     except FileNotFoundError:
         print(f"Error: The file '{path}' wasn't found. Try again...")
         print("Use --help or -h for options")
         exit(1)
 
 
-def required_to_beginning_list(nested_list: List[List[str]]) -> List[List[str]]:
-    required = [x for x in nested_list if "True" in x]
-    optional = [x for x in nested_list if "True" not in x]
+def sort_variables_by_required(variable_list: List[List[str]]) -> List[List[str]]:
+    required, optional = [], []
+    for var in variable_list:
+        if var[4] == "True":  # var[4] refers to the 'Required' column
+            required.append(var)
+        else:
+            optional.append(var)
     return required + optional
 
 
-def extract_values(terraform_hcl_list: List[Dict[str, Any]]) -> List[List[str]]:
-    markdown_table = []
-    for terraform_dict in terraform_hcl_list:
-        for terraform_var_dict in terraform_dict.get("variable", []):
-            for name, value in terraform_var_dict.items():
-                var_type = value.get("type", "").strip("${}")
+def extract_variables(terraform_configs: List[Dict[str, Any]]) -> List[List[str]]:
+    variable_rows = []
+    for terraform_dict in terraform_configs:
+        for variable_config in terraform_dict.get("variable", []):
+            for name, value in variable_config.items():
+                variable_type = value.get("type", "").strip("${}")
                 description = value.get("description", "")
                 default = value.get("default", "n/a")
                 sensitive = value.get("sensitive", False)
 
-                markdown_table.append(
+                variable_rows.append(
                     [
                         name,
-                        var_type,
+                        variable_type,
                         description,
                         default,
                         "True" if default == "n/a" else "False",
                         "True" if sensitive else "False",
                     ]
                 )
-    return required_to_beginning_list(markdown_table)
+    return sort_variables_by_required(variable_rows)
 
 
-def generate_markdown_table(markdown_list: List[List[str]]) -> None:
+def write_markdown_table(sorted_variables: List[List[str]]) -> None:
     MarkdownTableWriter(
         headers=["Name", "Type", "Description", "Default", "Required", "Sensitive"],
-        value_matrix=markdown_list,
+        value_matrix=sorted_variables,
         margin=1,
         column_styles=[
             Style(align="left"),
@@ -82,10 +86,10 @@ def generate_markdown_table(markdown_list: List[List[str]]) -> None:
 
 
 def main():
-    paths = cli_arguments().path
-    terraform_hcl_list = load_terraform_files(paths)
-    markdown_list = extract_values(terraform_hcl_list)
-    generate_markdown_table(markdown_list)
+    file_paths = parse_cli_arguments().path
+    terraform_configs = load_terraform_files(file_paths)
+    sorted_variables = extract_variables(terraform_configs)
+    write_markdown_table(sorted_variables)
 
 
 if __name__ == "__main__":
