@@ -15,7 +15,6 @@ def cli_arguments() -> Namespace:
     parser.add_argument(
         "-p",
         "--path",
-        default=[],
         action="append",
         help="Local path to your Terraform variables file (default: ./variables.tf)",
     )
