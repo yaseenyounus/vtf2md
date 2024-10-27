@@ -6,6 +6,8 @@ from sys import exit
 from typing import List
 from itertools import chain
 
+# TODO - set default path with [] logic
+
 
 def cli_arguments() -> List[str]:
     parser = ArgumentParser()
@@ -19,12 +21,16 @@ def cli_arguments() -> List[str]:
     return parser.parse_args()
 
 
-def load_tf_file(file_path: str) -> dict:
+def load_terraform_files(paths: List[str]) -> List[dict]:
     try:
-        with open(file_path, "r") as file:
-            return load(file)
+        terraform_hcl_list = []
+        for path in paths:
+            with open(path, "r") as file:
+                terraform_hcl_list.append(load(file))
+        return terraform_hcl_list
     except FileNotFoundError:
-        print("Error: The file wasn't found. Try again...")
+        print(f"Error: The file '{path}' wasn't found. Try again...")
+        print("Use --help or -h for options")
         exit(1)
 
 
@@ -74,26 +80,24 @@ def main():
     paths = cli_arguments().path
     print(paths)
 
-    # terraform_dict = load_tf_file(args.path)
-    tf_rendered_list = []
-    for path in paths:
-        tf_rendered_list.append(load_tf_file(path))
-    print(tf_rendered_list)
+    terraform_hcl_list = load_terraform_files(paths)
+    print(terraform_hcl_list)
 
     # markdown_list = extract_values(terraform_dict)
-    tf_var_list = []
-    for tf_dict in tf_rendered_list:
-        tf_var_list.append(extract_values(tf_dict))
 
-    print(tf_var_list)
+    # tf_var_list = []
+    # for tf_dict in tf_rendered_list:
+    #     tf_var_list.append(extract_values(tf_dict))
 
-    tf_var_combined_list = list(chain(*tf_var_list))
-    print(tf_var_combined_list)
+    # print(tf_var_list)
 
-    sorted_tf_vars = required_to_beginning_list(tf_var_combined_list)
-    print(sorted_tf_vars)
+    # tf_var_combined_list = list(chain(*tf_var_list))
+    # print(tf_var_combined_list)
 
-    generate_md_table(sorted_tf_vars)
+    # sorted_tf_vars = required_to_beginning_list(tf_var_combined_list)
+    # print(sorted_tf_vars)
+
+    # generate_md_table(sorted_tf_vars)
 
 
 if __name__ == "__main__":
