@@ -1,9 +1,10 @@
 from argparse import ArgumentParser, Namespace
+from sys import exit
+from typing import Any, Dict, List
+
 from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
-from sys import exit
-from typing import Any, Dict, List
 
 # TODO - set default path with [] logic
 
