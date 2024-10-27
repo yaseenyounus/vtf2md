@@ -3,7 +3,7 @@ from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 from sys import exit
-from typing import List
+from typing import Any, Dict, List
 from itertools import chain
 
 # TODO - set default path with [] logic
@@ -21,7 +21,7 @@ def cli_arguments() -> List[str]:
     return parser.parse_args()
 
 
-def load_terraform_files(paths: List[str]) -> List[dict]:
+def load_terraform_files(paths: List[str]) -> List[Dict[str, Any]]:
     try:
         terraform_hcl_list = []
         for path in paths:
@@ -34,34 +34,36 @@ def load_terraform_files(paths: List[str]) -> List[dict]:
         exit(1)
 
 
-def required_to_beginning_list(nested_list: list) -> list:
+def required_to_beginning_list(nested_list: List[List[str]]) -> List[List[str]]:
     required = [x for x in nested_list if "True" in x]
     optional = [x for x in nested_list if "True" not in x]
     return required + optional
 
 
-def extract_values(values: dict) -> list:
-    md_table = []
-    for x in values["variable"]:
-        for key, value in x.items():
-            name = key
-            var_type = value.get("type", "").strip("${}")
-            description = value.get("description", "")
-            default = value.get("default", "n/a")
+def extract_values(terraform_hcl_list: List[Dict[str, Any]]) -> List[List[str]]:
+    markdown_table = []
+    for terraform_dict in terraform_hcl_list:
+        for terraform_var_dict in terraform_dict.get("variable", []):
+            for name, value in terraform_var_dict.items():
+                var_type = value.get("type", "").strip("${}")
+                description = value.get("description", "")
+                default = value.get("default", "n/a")
+                sensitive = value.get("sensitive", False)
 
-            md_table.append(
-                [
-                    name,
-                    var_type,
-                    description,
-                    default,
-                    "True" if default == "n/a" else "False",
-                ]
-            )
-    return required_to_beginning_list(md_table)
+                markdown_table.append(
+                    [
+                        name,
+                        var_type,
+                        description,
+                        default,
+                        "True" if default == "n/a" else "False",
+                        "True" if sensitive else "False",
+                    ]
+                )
+    return required_to_beginning_list(markdown_table)
 
 
-def generate_md_table(values: list) -> None:
+def generate_markdown_table(values: list) -> None:
     MarkdownTableWriter(
         headers=["Name", "Type", "Description", "Default", "Required"],
         value_matrix=values,
@@ -81,9 +83,9 @@ def main():
     print(paths)
 
     terraform_hcl_list = load_terraform_files(paths)
-    print(terraform_hcl_list)
 
-    # markdown_list = extract_values(terraform_dict)
+    markdown_list = extract_values(terraform_hcl_list)
+    print(markdown_list)
 
     # tf_var_list = []
     # for tf_dict in tf_rendered_list:
@@ -97,7 +99,7 @@ def main():
     # sorted_tf_vars = required_to_beginning_list(tf_var_combined_list)
     # print(sorted_tf_vars)
 
-    # generate_md_table(sorted_tf_vars)
+    # generate_markdown_table(sorted_tf_vars)
 
 
 if __name__ == "__main__":
