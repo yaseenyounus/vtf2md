@@ -8,6 +8,7 @@ from pytablewriter.style import Style
 
 # TODO - update readme
 # TODO - separate into different files
+# TODO - try to make binary exectable 
 
 
 def parse_cli_arguments() -> Namespace:
