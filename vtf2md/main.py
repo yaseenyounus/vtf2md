@@ -4,7 +4,6 @@ from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 from sys import exit
 from typing import Any, Dict, List
-from itertools import chain
 
 # TODO - set default path with [] logic
 
@@ -87,19 +86,7 @@ def main():
     markdown_list = extract_values(terraform_hcl_list)
     print(markdown_list)
 
-    # tf_var_list = []
-    # for tf_dict in tf_rendered_list:
-    #     tf_var_list.append(extract_values(tf_dict))
-
-    # print(tf_var_list)
-
-    # tf_var_combined_list = list(chain(*tf_var_list))
-    # print(tf_var_combined_list)
-
-    # sorted_tf_vars = required_to_beginning_list(tf_var_combined_list)
-    # print(sorted_tf_vars)
-
-    # generate_markdown_table(sorted_tf_vars)
+    generate_markdown_table(markdown_list)
 
 
 if __name__ == "__main__":
