@@ -1,4 +1,4 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
@@ -8,7 +8,7 @@ from typing import Any, Dict, List
 # TODO - set default path with [] logic
 
 
-def cli_arguments() -> List[str]:
+def cli_arguments() -> Namespace:
     parser = ArgumentParser()
     parser.add_argument(
         "-p",
@@ -62,10 +62,10 @@ def extract_values(terraform_hcl_list: List[Dict[str, Any]]) -> List[List[str]]:
     return required_to_beginning_list(markdown_table)
 
 
-def generate_markdown_table(values: list) -> None:
+def generate_markdown_table(markdown_list: List[List[str]]) -> None:
     MarkdownTableWriter(
         headers=["Name", "Type", "Description", "Default", "Required", "Sensitive"],
-        value_matrix=values,
+        value_matrix=markdown_list,
         margin=1,
         column_styles=[
             Style(align="left"),
