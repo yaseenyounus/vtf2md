@@ -115,7 +115,9 @@ variable "node_groups" {
 
 ## Contributing
 
-Feel free to open a PR!
+- Fork this repository
+- Make your changes
+- Open a Pull Request
 
 ## License
 

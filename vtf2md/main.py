@@ -7,6 +7,7 @@ from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 
 # TODO - set default path with [] logic
+# TODO - update readme
 
 
 def cli_arguments() -> Namespace:
