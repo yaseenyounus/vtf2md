@@ -11,20 +11,20 @@ This Python script streamlines Terraform module documentation by extracting vari
 
 ## Installation
 
-Clone the repo
+### Clone the repo
 
 ```sh
 git clone https://github.com/yaseenyounus/vtf2md.git
 cd vtf2md
 ```
 
-Install Poetry if it's not already installed
+### Set up Poetry
 
 ```sh
 curl -sSL https://install.python-poetry.org | python3 -
 ```
 
-or if you have `brew` installed on Mac
+If you're on Mac and have `brew` installed
 
 ```sh
 brew install poetry
@@ -32,7 +32,7 @@ brew install poetry
 
 ## Usage
 
-You can use the `run.sh` script to install the Python dependencies with Poetry and then run the program.
+You can use the `run.sh` script to install the Python dependencies with Poetry and run the script on your behalf.
 
 ### Default path
 
@@ -61,8 +61,6 @@ or `-p` for short
 ```sh
 ./run.sh --path tests/variables.tf --path tests/variables_2.tf
 ```
-
-or
 
 ```sh
 ./run.sh -p tests/variables.tf -p tests/variables_2.tf
