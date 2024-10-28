@@ -1,8 +1,8 @@
-# `variables.tf` 2 Markdown (vtf2md)
+# variables.tf 2 Markdown (`vtf2md v0.2.0`)
 
 ## Overview
 
-This Python script takes a Terraform `variables.tf` file as input and outputs the extracted details in a markdown table, thereby streamlining the Terraform module documentation process.
+This Python script streamlines Terraform module documentation by extracting variables and generating Markdown tables, saving time and effort.
 
 ## Requirements
 
@@ -44,7 +44,7 @@ If a `variables.tf` file is in the same directory as the `run.sh` script, it can
 
 Otherwise... ⬇️
 
-### Passing a Terraform variables file path
+### Using a single Terraform file
 
 ```sh
 ./run.sh --path tests/variables.tf
@@ -54,6 +54,18 @@ or `-p` for short
 
 ```sh
 ./run.sh -p tests/variables.tf
+```
+
+### Using multiple Terraform files
+
+```sh
+./run.sh --path tests/variables.tf --path tests/variables_2.tf
+```
+
+or
+
+```sh
+./run.sh -p tests/variables.tf -p tests/variables_2.tf
 ```
 
 ## Example
@@ -104,14 +116,14 @@ variable "node_groups" {
 
 ### Output
 
-| Name            | Type         | Description                                     | Default                        | Required |
-| --------------- | ------------ | ----------------------------------------------- | ------------------------------ | -------- |
-| vpc_cidr_block  | string       | The top-level CIDR block for the VPC.           | 10.1.0.0/16                    | False    |
-| cidr_blocks     | list(string) | The CIDR blocks to create the workstations in.  | ['10.1.1.0/24', '10.1.2.0/24'] | False    |
-| namespace       | string       | Default namespace                               | n/a                            | True     |
-| cluster_id      | string       | Id to assign the new cluster                    | n/a                            | True     |
-| public_key_path | string       | Path to public key for ssh access               | ~/.ssh/id_rsa.pub              | False    |
-| node_groups     | number       | Number of nodes groups to create in the cluster | 3                              | False    |
+| Name            | Type         | Description                                     | Default                        | Required | Sensitive |
+| --------------- | ------------ | ----------------------------------------------- | ------------------------------ | -------- | --------- |
+| namespace       | string       | Default namespace                               | n/a                            | True     | False     |
+| cluster_id      | string       | Id to assign the new cluster                    | n/a                            | True     | False     |
+| vpc_cidr_block  | string       | The top-level CIDR block for the VPC.           | 10.1.0.0/16                    | False    | False     |
+| cidr_blocks     | list(string) | The CIDR blocks to create the workstations in.  | ['10.1.1.0/24', '10.1.2.0/24'] | False    | False     |
+| public_key_path | string       | Path to public key for ssh access               | ~/.ssh/id_rsa.pub              | False    | False     |
+| node_groups     | number       | Number of nodes groups to create in the cluster | 3                              | False    | False     |
 
 ## Contributing
 

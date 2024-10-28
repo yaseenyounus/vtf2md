@@ -6,7 +6,6 @@ from hcl2 import load
 from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 
-# TODO - update readme
 # TODO - separate into different files
 # TODO - try to make binary executable
 
