@@ -1,1 +1,5 @@
 tempCodeRunnerFile.py
+
+build/
+dist/
+*.spec

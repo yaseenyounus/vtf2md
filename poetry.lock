@@ -143,13 +143,13 @@ six = ">=1.5"
 
 [[package]]
 name = "python-hcl2"
-version = "5.0.0"
+version = "5.1.1"
 description = "A parser for HCL2"
 optional = false
 python-versions = ">=3.7.0"
 files = [
-    {file = "python-hcl2-5.0.0.tar.gz", hash = "sha256:af454beae19cd0c8295130c7c36ffa8d7050775b13472e082b593b1f47bb1198"},
-    {file = "python_hcl2-5.0.0-py3-none-any.whl", hash = "sha256:f625e9567893225c6685026a381655d6912b3144df5c794602e165ba4b880546"},
+    {file = "python-hcl2-5.1.1.tar.gz", hash = "sha256:e5c759d902e7566b9e8f1fcbf3eeef426269904f3fc0c3bf50d9090d00d1f57c"},
+    {file = "python_hcl2-5.1.1-py3-none-any.whl", hash = "sha256:4670e90aac0b0825f3a634fc684ba94a4268dbc15b062df26f4b4441af24c29a"},
 ]
 
 [package.dependencies]
@@ -168,13 +168,13 @@ files = [
 
 [[package]]
 name = "setuptools"
-version = "75.1.0"
+version = "75.2.0"
 description = "Easily download, build, install, upgrade, and uninstall Python packages"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "setuptools-75.1.0-py3-none-any.whl", hash = "sha256:35ab7fd3bcd95e6b7fd704e4a1539513edad446c097797f2985e0e4b960772f2"},
-    {file = "setuptools-75.1.0.tar.gz", hash = "sha256:d59a21b17a275fb872a9c3dae73963160ae079f1049ed956880cd7c09b120538"},
+    {file = "setuptools-75.2.0-py3-none-any.whl", hash = "sha256:a7fcb66f68b4d9e8e66b42f9876150a3371558f98fa32222ffaa5bced76406f8"},
+    {file = "setuptools-75.2.0.tar.gz", hash = "sha256:753bb6ebf1f465a1912e19ed1d41f403a79173a9acf66a42e7e6aec45c3c16ec"},
 ]
 
 [package.extras]
