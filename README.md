@@ -24,13 +24,15 @@ cd vtf2md
 pip install poetry
 ```
 
+_You may need to restart your terminal after installing `poetry`_
+
 ## Usage
 
 You can use the `run.sh` (Mac / Linux) or `run.bat` (Windows) script to install the Python dependencies with Poetry and run the script on your behalf.
 
 ### Default path
 
-If a `variables.tf` file is in the same directory as the `run.sh` script, it can be called without any arguments.
+If a `variables.tf` file is in the same directory as the `run.sh` / `run.bat` script, it can be called without any arguments.
 
 #### Mac / Linux
 
