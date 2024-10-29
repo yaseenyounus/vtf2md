@@ -1,4 +1,7 @@
 #!/bin/sh
 
+# Install Poetry dependencies
 poetry install
-poetry run python3 vtf2md/main.py "$@"
+
+# Run the Python script and pass all arguments
+poetry run python vtf2md/main.py "$@"

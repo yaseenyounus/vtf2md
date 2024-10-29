@@ -1,4 +1,5 @@
 from argparse import ArgumentParser, Namespace
+from os.path import abspath
 from sys import exit
 from typing import Any, Dict, List
 
@@ -7,7 +8,6 @@ from pytablewriter import MarkdownTableWriter
 from pytablewriter.style import Style
 
 # TODO - separate into different files
-# TODO - try to make binary executable
 
 
 def parse_cli_arguments() -> Namespace:
@@ -27,6 +27,7 @@ def load_terraform_files(file_paths: List[str]) -> List[Dict[str, Any]]:
 
     try:
         for path in file_paths:
+            path = abspath(path)
             with open(path, "r") as file:
                 terraform_configs.append(load(file))
         return terraform_configs

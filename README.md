@@ -21,49 +21,69 @@ cd vtf2md
 ### Set up Poetry
 
 ```sh
-curl -sSL https://install.python-poetry.org | python3 -
-```
-
-If you're on Mac and have `brew` installed
-
-```sh
-brew install poetry
+pip install poetry
 ```
 
 ## Usage
 
-You can use the `run.sh` script to install the Python dependencies with Poetry and run the script on your behalf.
+You can use the `run.sh` (Mac / Linux) or `run.bat` (Windows) script to install the Python dependencies with Poetry and run the script on your behalf.
 
 ### Default path
 
 If a `variables.tf` file is in the same directory as the `run.sh` script, it can be called without any arguments.
 
+#### Mac / Linux
+
 ```sh
 ./run.sh
+```
+
+#### Windows
+
+```batch
+./run.bat
 ```
 
 Otherwise... ⬇️
 
 ### Using a single Terraform file
 
+#### Mac / Linux
+
 ```sh
 ./run.sh --path tests/variables.tf
+
+# or `-p` for short
+./run.sh -p tests/variables.tf
 ```
 
-or `-p` for short
+#### Windows
 
-```sh
-./run.sh -p tests/variables.tf
+```batch
+./run.bat --path tests/variables.tf
+
+REM or `-p` for short
+./run.bat -p tests/variables.tf
 ```
 
 ### Using multiple Terraform files
 
-```sh
-./run.sh --path tests/variables.tf --path tests/variables_2.tf
-```
+#### Mac / Linux
 
 ```sh
+./run.sh --path tests/variables.tf --path tests/variables_2.tf
+
+# shorthand syntax
 ./run.sh -p tests/variables.tf -p tests/variables_2.tf
+```
+
+#### Windows
+
+```batch
+./run.bat --path tests/variables.tf --path tests/variables_2.tf
+
+REM shorthand syntax
+./run.bat -p tests/variables.tf -p tests/variables_2.tf
 ```
 
 ## Example
@@ -108,8 +128,16 @@ variable "node_groups" {
 
 ### Run
 
+#### Mac / Linux
+
 ```sh
 ./run.sh -p tests/variables.tf
+```
+
+#### Windows
+
+```batch
+./run.bat -p tests/variables.tf
 ```
 
 ### Output
