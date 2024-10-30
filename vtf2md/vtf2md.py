@@ -4,7 +4,7 @@ from loader import load_terraform_files
 from writer import write_markdown_table
 
 
-def main():
+def vtf2md():
     file_paths = parse_cli_arguments().path
     terraform_configs = load_terraform_files(file_paths)
     sorted_variables = extract_variables(terraform_configs)
@@ -12,4 +12,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    vtf2md()
