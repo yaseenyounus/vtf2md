@@ -1,3 +1,2 @@
 # Exclude .tf files
-tests/variables.tf -linguist-vendored
-tests/variables_2.tf -linguist-vendored
+*.tf linguist-detectable=false
