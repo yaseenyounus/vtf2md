@@ -1,2 +1,3 @@
 # Exclude .tf files
-*.tf linguist-detectable=false
+tests/*.tf -linguist-vendored
+tests/*.tf linguist-vendored
