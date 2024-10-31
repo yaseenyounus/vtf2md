@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "vtf2md"
-version = "0.1.0"
-description = "A tool to convert Terraform variable files into clean Markdown tables"
+version = "0.2.0"
+description = "A tool to convert Terraform variables into Markdown tables"
 authors = ["Yaseen Younus <yaseenyounus1@gmail.com>"]
 readme = "README.md"
 license = "MIT"
