@@ -1,0 +1,3 @@
+# Exclude .tf files
+tests/variables.tf linguist-hidden
+tests/variables_2.tf linguist-hidden

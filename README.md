@@ -28,7 +28,7 @@ _You may need to restart your terminal after installing `poetry`_
 
 ## Usage
 
-You can use the `run.sh` (Mac / Linux) or `run.bat` (Windows) script to install the Python dependencies with Poetry and run the script on your behalf.
+You can use the `run.sh` (Mac / Linux) or `run.bat` (Windows) script to install the Python dependencies with Poetry and run the script automatically.
 
 ### Default path
 
