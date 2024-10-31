@@ -1,0 +1,3 @@
+# Exclude .tf files
+tests/*.tf -linguist-vendored
+tests/*.tf linguist-vendored

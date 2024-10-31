@@ -1,8 +1,8 @@
-# `variables.tf` 2 Markdown (vtf2md)
+# variables.tf 2 Markdown (`vtf2md v0.2.0`)
 
 ## Overview
 
-This Python script takes a Terraform `variables.tf` file as input and outputs the extracted details in a markdown table, thereby streamlining the Terraform module documentation process.
+This Python script streamlines Terraform module documentation by extracting variables and generating Markdown tables, saving time and effort.
 
 ## Requirements
 
@@ -11,49 +11,81 @@ This Python script takes a Terraform `variables.tf` file as input and outputs th
 
 ## Installation
 
-Clone the repo
+### Clone the repo
 
 ```sh
 git clone https://github.com/yaseenyounus/vtf2md.git
 cd vtf2md
 ```
 
-Install Poetry if it's not already installed
+### Set up Poetry
 
 ```sh
-curl -sSL https://install.python-poetry.org | python3 -
+pip install poetry
 ```
 
-or if you have `brew` installed on Mac
-
-```sh
-brew install poetry
-```
+_You may need to restart your terminal after installing `poetry`_
 
 ## Usage
 
-You can use the `run.sh` script to install the Python dependencies with Poetry and then run the program.
+You can use the `run.sh` (Mac / Linux) or `run.bat` (Windows) script to install the Python dependencies with Poetry and run the script automatically.
 
 ### Default path
 
-If a `variables.tf` file is in the same directory as the `run.sh` script, it can be called without any arguments.
+If a `variables.tf` file is in the same directory as the `run.sh` / `run.bat` script, it can be called without any arguments.
+
+#### Mac / Linux
 
 ```sh
 ./run.sh
 ```
 
+#### Windows
+
+```batch
+./run.bat
+```
+
 Otherwise... ⬇️
 
-### Passing a Terraform variables file path
+### Using a single Terraform file
+
+#### Mac / Linux
 
 ```sh
 ./run.sh --path tests/variables.tf
+
+# or `-p` for short
+./run.sh -p tests/variables.tf
 ```
 
-or `-p` for short
+#### Windows
+
+```batch
+./run.bat --path tests/variables.tf
+
+REM or `-p` for short
+./run.bat -p tests/variables.tf
+```
+
+### Using multiple Terraform files
+
+#### Mac / Linux
 
 ```sh
-./run.sh -p tests/variables.tf
+./run.sh --path tests/variables.tf --path tests/variables_2.tf
+
+# shorthand syntax
+./run.sh -p tests/variables.tf -p tests/variables_2.tf
+```
+
+#### Windows
+
+```batch
+./run.bat --path tests/variables.tf --path tests/variables_2.tf
+
+REM shorthand syntax
+./run.bat -p tests/variables.tf -p tests/variables_2.tf
 ```
 
 ## Example
@@ -98,24 +130,34 @@ variable "node_groups" {
 
 ### Run
 
+#### Mac / Linux
+
 ```sh
 ./run.sh -p tests/variables.tf
 ```
 
+#### Windows
+
+```batch
+./run.bat -p tests/variables.tf
+```
+
 ### Output
 
-| Name            | Type         | Description                                     | Default                        | Required |
-| --------------- | ------------ | ----------------------------------------------- | ------------------------------ | -------- |
-| vpc_cidr_block  | string       | The top-level CIDR block for the VPC.           | 10.1.0.0/16                    | False    |
-| cidr_blocks     | list(string) | The CIDR blocks to create the workstations in.  | ['10.1.1.0/24', '10.1.2.0/24'] | False    |
-| namespace       | string       | Default namespace                               | n/a                            | True     |
-| cluster_id      | string       | Id to assign the new cluster                    | n/a                            | True     |
-| public_key_path | string       | Path to public key for ssh access               | ~/.ssh/id_rsa.pub              | False    |
-| node_groups     | number       | Number of nodes groups to create in the cluster | 3                              | False    |
+| Name            | Type         | Description                                     | Default                        | Required | Sensitive |
+| --------------- | ------------ | ----------------------------------------------- | ------------------------------ | -------- | --------- |
+| namespace       | string       | Default namespace                               | n/a                            | True     | False     |
+| cluster_id      | string       | Id to assign the new cluster                    | n/a                            | True     | False     |
+| vpc_cidr_block  | string       | The top-level CIDR block for the VPC.           | 10.1.0.0/16                    | False    | False     |
+| cidr_blocks     | list(string) | The CIDR blocks to create the workstations in.  | ['10.1.1.0/24', '10.1.2.0/24'] | False    | False     |
+| public_key_path | string       | Path to public key for ssh access               | ~/.ssh/id_rsa.pub              | False    | False     |
+| node_groups     | number       | Number of nodes groups to create in the cluster | 3                              | False    | False     |
 
 ## Contributing
 
-Feel free to open a PR!
+- Fork this repository
+- Make your changes
+- Open a Pull Request
 
 ## License
 
